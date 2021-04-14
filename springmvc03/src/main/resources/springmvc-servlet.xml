@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--配置基类包的注入-->
+    <context:component-scan base-package="cn.smbms.controller"/>
+    <!--配置mvc注解的允许-->
+    <mvc:annotation-driven/>
+    <!--进行页面静态资源的获取-->
+    <mvc:resources mapping="/statics/**" location="/statics/"/>
+
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="suffix" value=".jsp"/><!--后缀-->
+        <property name="prefix" value="/jsp/"/><!--前缀-->
+    </bean>
+    <!--配置一个全局异常捕获类-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.ArithmeticException">error3</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
